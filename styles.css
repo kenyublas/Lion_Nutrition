@@ -476,63 +476,63 @@ section {
     color: #fff
 }
 
-    .envios {
-      background: var(--lion-yellow)
-    }
+.envios {
+    background: var(--lion-yellow)
+}
 
-    .envios .section-label {
-      color: var(--lion-black)
-    }
+.envios .section-label {
+    color: var(--lion-black)
+}
 
-    .envios .section-title {
-      color: var(--lion-black)
-    }
+.envios .section-title {
+    color: var(--lion-black)
+}
 
-    .envios .section-line {
-      background: var(--lion-black)
-    }
+.envios .section-line {
+    background: var(--lion-black)
+}
 
-    .envios-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem
-    }
+.envios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem
+}
 
-    .envio-item {
-      text-align: center
-    }
+.envio-item {
+    text-align: center
+}
 
-    .envio-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem
-    }
+.envio-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem
+}
 
-    .envio-icon svg {
-      width: 32px;
-      height: 32px
-    }
+.envio-icon svg {
+    width: 32px;
+    height: 32px
+}
 
-    .envio-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--lion-black);
-      letter-spacing: 1px
-    }
+.envio-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--lion-black);
+    letter-spacing: 1px
+}
 
-    .envio-desc {
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.6);
-      margin-top: 4px
-    }
+.envio-desc {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 4px
+}
 
 
 .redes {
@@ -572,6 +572,7 @@ section {
     width: 20px;
     height: 20px
 }
+
 /* Footer Styles */
 footer {
     background: #050505;
@@ -584,38 +585,38 @@ footer {
     align-items: center
 }
 
-    .footer-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: var(--lion-yellow);
-      letter-spacing: 3px
-    }
+.footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--lion-yellow);
+    letter-spacing: 3px
+}
 
-    .footer-copy {
-      font-size: 12px;
-      color: #444;
-      letter-spacing: 1px
-    }
+.footer-copy {
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 1px
+}
 
-    .footer-wa {
-      background: var(--lion-yellow);
-      color: var(--lion-black);
-      padding: 12px 24px;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      border: none
-    }
+.footer-wa {
+    background: var(--lion-yellow);
+    color: var(--lion-black);
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    border: none
+}
 
 
 .footer-wa:hover {
-    background: #ffe033   
+    background: #ffe033
 }
 
 .wa-float {
@@ -639,6 +640,7 @@ footer {
     height: 30px;
     fill: #fff
 }
+
 /* Esto hace que el salto al hacer clic sea suave */
 html {
     scroll-behavior: smooth;
@@ -703,12 +705,12 @@ html {
 }
 
 /* Diseño de la imagen con marco */
-.image-wrapper {
+.image-frame {
     position: relative;
     padding: 20px;
 }
 
-.image-wrapper img {
+.image-frame img {
     width: 100%;
     border-radius: 10px;
     filter: grayscale(0.5) contrast(1.2);
@@ -716,7 +718,7 @@ html {
     z-index: 2;
 }
 
-.image-border {
+.yellow-decorator {
     position: absolute;
     top: 0;
     right: 0;
@@ -733,7 +735,70 @@ html {
         grid-template-columns: 1fr;
         text-align: center;
     }
+
     .about-stats {
         justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Navbar: Apilamos los elementos para que no se amontonen */
+    nav {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Hero Section: Centramos el texto y ajustamos el león */
+    .hero {
+        padding: 40px 20px;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .hero-lion-container {
+        display: none;
+        /* Ocultamos el león absoluto en móviles muy pequeños para evitar desorden */
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        line-height: 1;
+    }
+
+    .hero-btns {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Sección Nosotros: De 2 columnas a 1 columna */
+    .about-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-stats {
+        justify-content: center;
+    }
+
+    .yellow-decorator {
+        display: none;
+        /* Simplificamos el diseño visual en móvil */
+    }
+
+    .about-section {
+        padding: 60px 20px;
     }
 }
