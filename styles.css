@@ -446,7 +446,7 @@ section {
 }
 
 .lion-ambassadors-frame::before {
-    content: "LION NUTRITION • OFFICIAL TEAM";
+    
     position: absolute;
     top: -15px;
     left: 50%;
