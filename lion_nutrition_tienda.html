@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lion Nutrition | Tienda</title>
+</head>
+
+<body>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --y: #FFD600;
+      --b: #0a0a0a;
+      --g1: #1a1a1a;
+      --g2: #222;
+      --g3: #2a2a2a
+    }
+
+    body {
+      background: var(--b);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden
+    }
+
+    /* NAV */
+    nav {
+      background: rgba(10, 10, 10, 0.97);
+      border-bottom: 2px solid var(--y);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 200
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .brand-logo-container {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .nav-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain
+    }
+
+    .nav-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--y)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem
+    }
+
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--y)
+    }
+
+    .nav-cart-btn {
+      background: var(--y);
+      color: var(--b);
+      border: none;
+      padding: 8px 16px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative
+    }
+
+    .badge {
+      background: var(--b);
+      color: var(--y);
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700
+    }
+
+    /* HERO TIENDA */
+    .shop-hero {
+      background: var(--g1);
+      border-bottom: 1px solid #222;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    .shop-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 2px;
+      line-height: 1
+    }
+
+    .shop-hero h1 span {
+      color: var(--y)
+    }
+
+    .shop-hero p {
+      color: #666;
+      font-size: 14px;
+      margin-top: 4px
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      max-width: 400px
+    }
+
+    .search-box input {
+      flex: 1;
+      background: #111;
+      border: 1px solid #333;
+      border-right: none;
+      color: #fff;
+      padding: 10px 14px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      outline: none
+    }
+
+    .search-box input::placeholder {
+      color: #555
+    }
+
+    .search-box input:focus {
+      border-color: var(--y)
+    }
+
+    .search-box button {
+      background: var(--y);
+      color: var(--b);
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px
+    }
+
+    /* LAYOUT */
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      min-height: 70vh
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: var(--g1);
+      border-right: 1px solid #222;
+      padding: 1.5rem;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto
+    }
+
+    .filter-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: var(--y);
+      margin-bottom: 1rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #333
+    }
+
+    .filter-section {
+      margin-bottom: 1.5rem
+    }
+
+    .filter-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 10px;
+      font-weight: 700
+    }
+
+    .filter-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 8px 12px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--y);
+      color: var(--b);
+      border-color: var(--y);
+      font-weight: 700
+    }
+
+    .price-range {
+      width: 100%;
+      accent-color: var(--y);
+      margin: 8px 0
+    }
+
+    .price-vals {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666
+    }
+
+    .price-val {
+      color: var(--y);
+      font-weight: 700
+    }
+
+    .order-select {
+      width: 100%;
+      background: #111;
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 8px 10px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer
+    }
+
+    .order-select:focus {
+      border-color: var(--y)
+    }
+
+    /* PRODUCTS AREA */
+    .products-area {
+      padding: 1.5rem
+    }
+
+    .products-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem
+    }
+
+    .results-count {
+      font-size: 13px;
+      color: #666
+    }
+
+    .results-count span {
+      color: var(--y);
+      font-weight: 700
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px
+    }
+
+    /* PRODUCT CARD */
+    .prod-card {
+      background: var(--g2);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+      border: 1px solid #2a2a2a;
+      position: relative;
+      overflow: hidden
+    }
+
+    .prod-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--y)
+    }
+
+    .prod-img {
+      width: 100%;
+      height: 200px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .prod-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 12px
+    }
+
+    .promo-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--y);
+      color: var(--b);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px
+    }
+
+    .new-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #ff4444;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px
+    }
+
+    .prod-info {
+      padding: 12px
+    }
+
+    .prod-cat {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px
+    }
+
+    .prod-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 8px
+    }
+
+    .prod-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--y);
+      letter-spacing: 1px
+    }
+
+    .prod-price-old {
+      font-size: 12px;
+      color: #555;
+      text-decoration: line-through;
+      margin-left: 6px
+    }
+
+    .prod-add {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--y);
+      color: var(--y);
+      padding: 8px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px
+    }
+
+    .prod-add:hover {
+      background: var(--y);
+      color: var(--b)
+    }
+
+    .prod-add.added {
+      background: var(--y);
+      color: var(--b)
+    }
+
+    /* CART PANEL */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 300;
+      display: none
+    }
+
+    .cart-overlay.open {
+      display: block
+    }
+
+    .cart-panel {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 380px;
+      background: var(--g1);
+      border-left: 2px solid var(--y);
+      z-index: 301;
+      transform: translateX(100%);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column
+    }
+
+    .cart-panel.open {
+      transform: translateX(0)
+    }
+
+    .cart-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .cart-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: var(--y)
+    }
+
+    .cart-close {
+      background: transparent;
+      border: 1px solid #444;
+      color: #aaa;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .cart-close:hover {
+      border-color: var(--y);
+      color: var(--y)
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #555
+    }
+
+    .cart-empty svg {
+      width: 48px;
+      height: 48px;
+      fill: #333;
+      margin: 0 auto 1rem;
+      display: block
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #2a2a2a;
+      align-items: center
+    }
+
+    .cart-item-img {
+      width: 56px;
+      height: 56px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .cart-item-img svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--y);
+      opacity: 0.4
+    }
+
+    .cart-item-info {
+      flex: 1
+    }
+
+    .cart-item-name {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2
+    }
+
+    .cart-item-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--y);
+      margin-top: 2px
+    }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px
+    }
+
+    .qty-btn {
+      background: #333;
+      border: none;
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s
+    }
+
+    .qty-btn:hover {
+      background: var(--y);
+      color: var(--b)
+    }
+
+    .qty-num {
+      font-size: 14px;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: center
+    }
+
+    .cart-remove {
+      background: transparent;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px;
+      transition: color 0.2s
+    }
+
+    .cart-remove:hover {
+      color: #ff4444
+    }
+
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid #333
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem
+    }
+
+    .cart-total-label {
+      font-size: 14px;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 1px
+    }
+
+    .cart-total-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--y)
+    }
+
+    .cart-wa-btn {
+      width: 100%;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 16px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s;
+      margin-bottom: 8px
+    }
+
+    .cart-wa-btn:hover {
+      background: #1da851
+    }
+
+    .cart-wa-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff
+    }
+
+    .cart-clear {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #444;
+      color: #666;
+      padding: 10px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s
+    }
+
+    .cart-clear:hover {
+      border-color: #ff4444;
+      color: #ff4444
+    }
+
+    .cart-note {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      margin-top: 8px;
+      line-height: 1.5
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 400;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem
+    }
+
+    .modal-overlay.open {
+      display: flex
+    }
+
+    .modal {
+      background: var(--g1);
+      border: 1px solid var(--y);
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: transparent;
+      border: 1px solid #444;
+      color: #aaa;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .modal-close:hover {
+      border-color: var(--y);
+      color: var(--y)
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 280px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .modal-img svg {
+      width: 80px;
+      height: 80px;
+      fill: var(--y);
+      opacity: 0.3
+    }
+
+    .modal-body {
+      padding: 1.5rem
+    }
+
+    .modal-cat {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--y);
+      margin-bottom: 6px
+    }
+
+    .modal-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 1px;
+      margin-bottom: 6px
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.6;
+      margin-bottom: 1rem
+    }
+
+    .modal-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: var(--y);
+      margin-bottom: 1.5rem
+    }
+
+    .modal-add {
+      width: 100%;
+      background: var(--y);
+      color: var(--b);
+      border: none;
+      padding: 14px;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s
+    }
+
+    .modal-add:hover {
+      background: #ffe033
+    }
+
+    /* WA FLOAT */
+    .wa-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 500;
+      background: #25D366;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer
+    }
+
+    .wa-float svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--y);
+      color: var(--b);
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 600;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0)
+    }
+  </style>
+
+  <!-- NAV CORREGIDO -->
+  <nav>
+    <div class="nav-logo">
+      <div class="brand-logo-container">
+        <img src="logo.png" alt="Lion Logo" class="nav-logo-img">
+      </div>
+      <span class="nav-brand">Lion Nutrition</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="lion_nutrition_tienda.html" class="active">Tienda</a>
+    </div>
+    <button class="nav-cart-btn" onclick="toggleCart()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 01-8 0" />
+      </svg>
+      Carrito <span class="badge" id="cartBadge">0</span>
+    </button>
+  </nav>
+
+  <div class="shop-hero">
+    <div>
+      <h1>NUESTRA <span>TIENDA</span></h1>
+      <p id="heroCount">Mostrando todos los productos</p>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="applyFilters()">
+      <button onclick="applyFilters()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="shop-layout">
+    <aside class="sidebar">
+      <div class="filter-title">FILTROS</div>
+      <div class="filter-section">
+        <div class="filter-label">Categoría</div>
+        <button class="filter-btn active" onclick="setCategory('todos',this)">Todos</button>
+        <button class="filter-btn" onclick="setCategory('proteinas',this)">Proteínas</button>
+        <button class="filter-btn" onclick="setCategory('creatina',this)">Creatina</button>
+        <button class="filter-btn" onclick="setCategory('quemadores',this)">Quemadores</button>
+        <button class="filter-btn" onclick="setCategory('vitaminas',this)">Vitaminas</button>
+        <button class="filter-btn" onclick="setCategory('pre-entrenos',this)">Pre-Entrenos</button>
+        <button class="filter-btn" onclick="setCategory('otros',this)">Otros</button>
+      </div>
+      <div class="filter-section">
+        <div class="filter-label">Precio máximo</div>
+        <input type="range" class="price-range" id="priceRange" min="0" max="1000" value="1000" step="10"
+          oninput="updatePrice(this.value)">
+        <div class="price-vals"><span>S/ 0</span><span>Hasta: <span class="price-val" id="priceVal">S/
+              1000</span></span></div>
+      </div>
+      <div class="filter-section">
+        <div class="filter-label">Ordenar por</div>
+        <select class="order-select" id="orderSelect" onchange="applyFilters()">
+          <option value="default">Relevancia</option>
+          <option value="price-asc">Menor precio</option>
+          <option value="price-desc">Mayor precio</option>
+          <option value="name-asc">A - Z</option>
+        </select>
+      </div>
+      <div class="filter-section">
+        <div class="filter-label">Disponibilidad</div>
+        <button class="filter-btn active" onclick="setPromo('todos',this)">Todos</button>
+        <button class="filter-btn" onclick="setPromo('promo',this)">En promoción</button>
+      </div>
+    </aside>
+
+    <main class="products-area">
+      <div class="products-header">
+        <div class="results-count">Mostrando <span id="countSpan">0</span> productos</div>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </main>
+  </div>
+
+  <!-- CART PANEL -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>Tu Carrito</h2>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-val" id="cartTotal">S/ 0</span>
+      </div>
+      <button class="cart-wa-btn" onclick="sendToWhatsApp()">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        Pedir por WhatsApp
+      </button>
+      <button class="cart-clear" onclick="clearCart()">Vaciar carrito</button>
+      <p class="cart-note">Al hacer clic serás redirigido a WhatsApp con tu pedido listo para enviar.</p>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLE -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      <div class="modal-img" id="modalImg">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" />
+          <path d="M16 3H8L6 7h12l-2-4z" />
+        </svg>
+      </div>
+      <div class="modal-body">
+        <div class="modal-cat" id="modalCat"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-price" id="modalPrice"></div>
+        <button class="modal-add" id="modalAddBtn" onclick="addFromModal()">+ Agregar al Carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="wa-float" onclick="window.open('https://wa.me/51929504847','_blank')">
+    <svg viewBox="0 0 24 24">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </div>
+
+  <script>
+    const WA = '51929504847';
+
+    const PRODUCTS = [
+      { id: 1, name: 'GOLD STANDAR 5 LIBRAS', cat: 'proteinas', price: 349, img: 'img/proteina_gold_standar.png', desc: 'proteina whey de la mas alta calidad.', promo: false, new: true },
+      { id: 2, name: 'PROSTAR WHEY 5 LIBRAS', cat: 'proteinas', price: 289, img: 'img/proteina_prostar_whey.png', oldPrice: 299, desc: 'Proteina ideal para tu etapa de ganancia de tamaño con calidad de producto.', promo: true, new: false },
+      { id: 3, name: 'INSANE WHEY 5 LIBRAS', cat: 'proteinas', price: 259, img: 'img/proteina_insane_whey.png', desc: 'Proteína aislada de máxima pureza. 90% proteína por porción. Sin lactosa, ideal para personas sensibles.', promo: false, new: false },
+      { id: 4, name: 'NITROTECH 5 LIBRAS', cat: 'proteinas', price: 269, img: 'img/proteina_nitrotech.png', desc: 'proteina whey de la mas alta calidad.', promo: true, new: false },
+      { id: 5, name: 'GOLD WHEY 5 LIBRAS', cat: 'proteinas', price: 239, img: 'img/proteina_gold_whey.png', desc: 'proteina ideal para tu etapa de ganancia de volumen.', promo: true, new: false },
+      { id: 6, name: 'INSANE WHEY 10 LIBRAS', cat: 'proteinas', price: 379, img: 'img/proteina_insane_whey10.png', desc: 'proteina whey para etapa de volumen.', promo: false, new: false },
+      { id: 7, name: 'ISO 100 5 LIBRAS', cat: 'proteinas', price: 529, img: 'img/proteina_iso_100.png', desc: 'proteina why isolatada de la mas alta calidad.', promo: true, new: false },
+      { id: 8, name: 'ISO XP 5 LIBRAS', cat: 'proteinas', price: 369, img: 'img/proteina_iso_xp.png', desc: ' isolatada de calidad para gente con problemas gastricos.', promo: true, new: false },
+      { id: 9, name: 'INSANE WHEY 10 LIBRAS', cat: 'proteinas', price: 329, img: 'img/proteina_insane_whey10_libras.png', desc: 'buen sabor calidad y precio.', promo: false, new: true },
+      { id: 10, name: 'DIESEL 10', cat: 'proteinas', price: 399, img: 'img/proteina_isolatada_diesel.png', desc: 'PROTEINA WHEY ISOLATADA DE LA MAS ALTA CALIDAD.', promo: true, new: false },
+      { id: 11, name: 'ISO ELITE 5 LIBRAS', cat: 'proteinas', price: 299, img: 'img/proteina_isolatada_iso.png', desc: 'HIDROLIZADA E ISOLATADA PARA TU DIA A DIA', promo: false, new: true },
+      { id: 12, name: 'CARNIVOR 5 LIBRAS', cat: 'proteinas', price: 299, img: 'img/proteina_isolatada_carnivor.png', desc: 'PROTEINA ISOLATADA UN CLASICO PARA GENTE NO TOLERANTE AL LACTEO.', promo: true, new: false },
+      { id: 13, name: 'ISO GOLD 5 LIBRAS', cat: 'proteinas', price: 329, img: 'img/proteina_isolatada_iso_gold.png', desc: ' PROTEINA ISOLATADA  WHEY DE LA MAS ALTA CALIDAD ISOLATADA.', promo: false, new: true },
+      { id: 14, name: 'CHOCOLATE CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_chocolate.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA', promo: true, new: false },
+      { id: 15, name: 'PASTEL DE CUMPLE CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_pastel.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA', promo: true, new: false },
+      { id: 16, name: 'MENTA CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_cbum.png', desc: 'PROTEINA WHEY DE LA MAS ALTA CALIDAD ISOLATADA', promo: true, new: false },
+      { id: 17, name: 'VAINILLA CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_vainilla_cbum.png', desc: 'LA MEJOR PROTEINA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA.', promo: true, new: false },
+      { id: 18, name: 'MAPLE CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteinas_isolatada_maple.png', desc: 'PROTEINA WHEY DE LA MAS ALTA CALIDAD ISOLATADA.', promo: true, new: false },
+      { id: 19, name: 'FRESA CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_fresa.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA .', promo: true, new: false },
+      { id: 20, name: 'GALLETAS ANIMALITOS CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_galleta.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA.', promo: true, new: false },
+      { id: 21, name: 'CREATINA RAW 100 SERVICIOS', cat: 'creatina', price: 189, img: 'img/creatina_1.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: true, new: false },
+      { id: 22, name: 'CREATINA RAW 30 SERVICIOS', cat: 'creatina', price: 89, img: 'img/creatina_raw.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: true, new: false },
+      { id: 23, name: 'CREATINA ON 300 GR', cat: 'creatina', price: 119, img: 'img/creatina_on_300.png', desc: 'CREATINA MICROLIZADA DE LA MAS ALTA CALIDAD .', promo: false, new: true },
+      { id: 24, name: 'CREATINA ULTIMATE 1 KILO', cat: 'creatina', price: 229, img: 'img/creatina_ultimate.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: false, new: true },
+      { id: 25, name: 'CREATINA ULTIMATE 300 GR', cat: 'creatina', price: 89, img: 'img/creatina_ultimate_300.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: false, new: true },
+      { id: 26, name: 'CREATINA ON 600 GR', cat: 'creatina', price: 199, img: 'img/creatina_on_600.png', desc: 'CREATINA MICROLIZADA DE LA MAS ALTA CALIDAD .', promo: false, new: true },
+      { id: 27, name: 'CREATINA DRAGON PHARMA 300 GR', cat: 'creatina', price: 89, img: 'img/creatina_dragon.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD MONOHYDRATE .', promo: false, new: true },
+      { id: 28, name: 'CREATINA KEVIN L 500GR', cat: 'creatina', price: 120, img: 'img/creatina_kevin.png', desc: 'CREATINA STANDAR MONOHYDRATE .', promo: false, new: true },
+      { id: 29, name: 'CREATINA MY PROTE CREAPURE 250 GR', cat: 'creatina', price: 99, img: 'img/creatina_creapure.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD CON SELLO CREAPURE.', promo: false, new: true },
+      { id: 30, name: 'CREATINA ONE SCIENCE 300 GR', cat: 'creatina', price: 99, img: 'img/creatina_science.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE .', promo: false, new: true },
+      { id: 31, name: 'CREATINA KEVIN L 300 GR', cat: 'creatina', price: 89, img: 'img/creatina_kevin_300.png', desc: 'CREATINA STANDAR MONOHYDRATE .', promo: false, new: true },
+      { id: 32, name: 'CREATINA MY PROTE 250 GR', cat: 'creatina', price: 89, img: 'img/creatina_prote.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD .', promo: false, new: true },
+      { id: 33, name: 'CREATINA P OUT 500 GR', cat: 'creatina', price: 120, img: 'img/creatina_p_out.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD MONOHYDRATE .', promo: false, new: true },
+      { id: 34, name: 'CREATINA P OUT  1.1 KILO ', cat: 'creatina', price: 199, img: 'img/creatina_p_out_1.png', desc: 'CREATINA STANDAR MONOHYDRATE .', promo: false, new: true },
+      { id: 35, name: 'CREATINA M5 250 GR', cat: 'creatina', price: 99, img: 'img/creatina_m5.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD.', promo: false, new: true },
+      { id: 36, name: 'DEMON BCA 60 SERVICIOS', cat: 'otros', price: 139, img: 'img/eaa_demon.png', desc: 'AMINO DE ALTA CALIDAD.', promo: false, new: true },
+      { id: 37, name: 'HYDRO BCA', cat: 'otros', price: 260, img: 'img/eaa_hydro.png', desc: 'LOS AMINOACIDOS DE ALTA CALIDAD.', promo: false, new: true },
+      { id: 38, name: 'CREATINA MY PROTE 250 GR', cat: 'creatina', price: 235, img: 'img/creatina_my_prote.png', desc: 'LOS MEJORES AMINOS ESCENCIALES PARA EL CUERPO.', promo: false, new: true },
+      { id: 39, name: 'TESTROL ORIGINAL', cat: 'otros', price: 139, img: 'img/testo_testrol.png', desc: 'PRECURSOR DE TESTOSTERONA DE MANERA NATURAL.', promo: false, new: true },
+      { id: 40, name: 'TESTROL GOLD', cat: 'otros', price: 189, img: 'img/testo_gold.png', desc: 'ELEVA TU LIBIDO Y FUERZA.', promo: false, new: true },
+      { id: 41, name: 'MULTIVITAMINICO CON TESTO', cat: 'otros', price: 159, img: 'img/testo_multivitaminico.png', desc: 'LAS MEJORES VITAMINAS ESCENCIALES PARA EL CUERPO.', promo: false, new: true },
+      { id: 42, name: 'LIPODREAM 90 PASTILLAS', cat: 'quemadores', price: 189, img: 'img/quemadores_lipodream.png', desc: 'QUEMADOR CON ALTA CONCENTRACIÓN.', promo: false, new: true },
+      { id: 43, name: 'LIVER RX', cat: 'quemadores', price: 159, img: 'img/quemadores_liver.png', desc: 'MULTIVITAMINICO Y PROTECTOR HEPATICO.', promo: false, new: true },
+      { id: 44, name: 'LIPOBLACK', cat: 'quemadores', price: 139, img: 'img/quemadores_lipoblack.png', desc: 'QUEMADOR STANDAR.', promo: false, new: true },
+      { id: 45, name: 'ISOLATE SASCHA', cat: 'otros', price: 319, img: 'img/sascha_fitness.png', desc: 'PROTEINA ISOLATADA DE ALTA CALIDAD.', promo: false, new: true },
+      { id: 46, name: 'RESTORE', cat: 'otros', price: 249, img: 'img/sascha_restore.png', desc: 'CORTISOL NIGHT SUPPORT.', promo: false, new: true },
+      { id: 47, name: 'COLLAGENO', cat: 'otros', price: 249, img: 'img/sascha_collageno.png', desc: 'COLAGENO 100 CON SABOR.', promo: false, new: true },
+      { id: 48, name: 'BCAA', cat: 'otros', price: 249, img: 'img/sascha_bcaa.png', desc: 'AMINOACIDOS DE ALTA CALIDAD.', promo: false, new: true },
+      { id: 49, name: 'FIT 9', cat: 'otros', price: 249, img: 'img/fit_9.png', desc: 'QUEMADOR DE GRASA DE ALTA CALIDAD Y CONCENTRACION.', promo: false, new: true },
+      { id: 50, name: 'OMEGA 3 REVIVE', cat: 'otros', price: 189, img: 'img/omega_3_revive.png', desc: 'AUMENTAR LA FUERZA Y RESISTENCIA DEL CUERPO.', promo: false, new: true },
+      { id: 51, name: 'CITRULINA INSANE', cat: 'otros', price: 119, img: 'img/citrulina_insane.png', desc: 'EXPLOTA TU RENDIMIENTO FISICO.', promo: false, new: true },
+      { id: 52, name: 'BETALINA INSANE', cat: 'otros', price: 119, img: 'img/betalina_insane.png', desc: 'REDUCE LA FATIGA MUSCULAR.', promo: false, new: true },
+      { id: 53, name: 'ARGINA P OUT', cat: 'otros', price: 149, img: 'img/argina_p.png', desc: 'REDUCE LA FATIGA MUSCULAR, MEJORA LA SALUD CARDIOVASCULAR.', promo: false, new: true },
+      { id: 54, name: 'CLEMBUTERL 50 TABLET', cat: 'otros', price: 189, img: 'img/caramelos_50.png', desc: 'SECADO RAPIDO.', promo: false, new: true },
+      { id: 55, name: 'ANAVAR 100 PASTILLAS', cat: 'otros', price: 249, img: 'img/caramelos_100.png', desc: 'AUMENTAR LA CANTIDAD DE PROTEINAS PRODUCIDA POR EL CUERPO.', promo: false, new: true },
+      { id: 56, name: 'WISTROL', cat: 'otros', price: 235, img: 'img/caramelos_wistrol.png', desc: 'AUMENTAR LA FUERZA Y RESISTENCIA DEL CUERPO.', promo: false, new: true },
+      { id: 57, name: 'ISOCOOL', cat: 'proteinas', price: 329, img: 'img/proteina_isolatada_isocool.png', desc: 'ISOLATADA DE GRAN CALIDAD.', promo: false, new: true },
+      { id: 58, name: 'CBUM ISOLATE 5 LB', cat: 'proteinas', price: 449, img: 'img/proteina_isolatada_cbum_isolate.png', desc: 'ISOLATADA DE GRAN CALIDAD.', promo: false, new: true },
+      { id: 59, name: 'ANIMAL PACK PASTILLAS', cat: 'otros', price: 269, img: 'img/pastillas_animal.png', desc: 'MULTIVITAMINICO.', promo: false, new: true },
+      { id: 60, name: 'ANIMAL PACK POLVO', cat: 'otros', price: 269, img: 'img/animal_pack_polvo.png', desc: 'MULTIVITAMINICO POLVO.', promo: false, new: true },
+      { id: 61, name: 'ANIMAL STACK', cat: 'otros', price: 269, img: 'img/animal_stack.png', desc: 'HORMONE BOOSTER.', promo: false, new: true },
+      { id: 62, name: 'L CARNITINA RC', cat: 'otros', price: 99, img: 'img/carnitina_rc.png', desc: 'CARNITINE.', promo: false, new: true },
+      { id: 63, name: 'COLAGENO REVIVE', cat: 'otros', price: 169, img: 'img/colageno_revive.png', desc: 'COLAGENO NATURAL.', promo: false, new: true },
+      { id: 64, name: 'QUEMADOR DE GRASA', cat: 'quemadores', price: 149, img: 'img/quemadores_de_grasa.png', desc: 'QUEMADOR DE GRASA.', promo: false, new: true },
+      { id: 65, name: 'SHAKER ORIGINAL INSANE', cat: 'otros', price: 29.99, img: 'img/shaker_original_insane.png', desc: 'SHAKER ACREDITADO.', promo: false, new: true },
+      { id: 66, name: 'SHAKER 3 CUERPOS INSANE', cat: 'otros', price: 39.99, img: 'img/shaker_3_cuerpos_insane.png', desc: 'SHAKER 3 CUERPOS.', promo: false, new: true },
+      { id: 67, name: 'SHAKER RAW CBUM', cat: 'otros', price: 49.99, img: 'img/shaker_raw_cbum.png', desc: 'SHAKER.', promo: false, new: true },
+      { id: 68, name: 'INSANE LABZ CREA', cat: 'creatina', price: 89, img: 'img/creatina_insane.png', desc: 'CREATINA 100% PURA.', promo: false, new: true },
+      { id: 69, name: 'INSANE LABZ CREA', cat: 'creatina', price: 199, img: 'img/creatina_insane_1k.png', desc: 'CREATINA DE 1 KG .', promo: false, new: true },
+      { id: 70, name: 'PSHYCHPATA 400 MG', cat: 'otros', price: 189, img: 'img/prewrok.png', desc: 'PREWROK.', promo: false, new: true },
+      { id: 71, name: 'C4 60 SERVICIOS', cat: 'pre-entrenos', price: 179, img: 'img/preentreno_prework.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 72, name: 'C4 30 SERVICIOS', cat: 'pre-entrenos', price: 150, img: 'img/preentreno_c4.png', desc: 'ENERGY,EDDURANCE,PUNCH.', promo: false, new: true },
+      { id: 73, name: 'TOTAL WAR', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_total.png', desc: 'ENFOQUE, ENERGIA.', promo: false, new: true },
+      { id: 74, name: 'GOLD 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_gold.png', desc: 'ENERGY,ENDURANCE,PUNCH', promo: false, new: true },
+      { id: 75, name: 'RED 35 SERVICIOS', cat: 'pre-entrenos', price: 149, img: 'img/preentreno_red.png', desc: 'LOCURA PICAZON A FULL', promo: false, new: true },
+      { id: 76, name: 'SAW 35 SERVICIOS', cat: 'pre-entrenos', price: 175, img: 'img/preentreno_saw.png', desc: 'ENFOQUE, ENERGIA.', promo: false, new: true },
+      { id: 77, name: 'TEST 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_test.png', desc: 'ENERGY, ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 78, name: 'RED HELLBOY 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_red_hellboy.png', desc: 'LOCURA PICAZON A FULL.', promo: false, new: true },
+      { id: 79, name: 'IM GOD 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_god.png', desc: 'ENERGY, ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 80, name: 'THAVAGE CBUM', cat: 'pre-entrenos', price: 179, img: 'img/preentreno_thavage.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 81, name: 'THUPER CBUM', cat: 'pre-entrenos', price: 229, img: 'img/preentreno_thuper.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 82, name: 'XTREM RAW', cat: 'pre-entrenos', price: 189, img: 'img/preentreno_xtrem.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 83, name: 'THE CURSE', cat: 'pre-entrenos', price: 199, img: 'img/preentreno_curse.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 84, name: 'RUSH BSN', cat: 'pre-entrenos', price: 189, img: 'img/preentreno_rush.png', desc: 'PICAZÓN A FULL Y PODER.', promo: false, new: true },
+      { id: 85, name: 'B NOX', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_b.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 86, name: 'NITRAFLEX 30 SER', cat: 'pre-entrenos', price: 179, img: 'img/preentreno_nitraflex.png', desc: 'ENERGY,ENDURANCE,PUNCH sin bajon.', promo: false, new: true },
+      { id: 87, name: 'NITRAFLEX 15 SER', cat: 'pre-entrenos', price: 139, img: 'img/preentreno_nitraflex_15.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+      { id: 88, name: 'B NOX', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_b_nox.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
+    ];
+
+
+    let cart = [];
+    let currentCategory = 'todos';
+    let currentPromo = 'todos';
+    let maxPrice = 1000;
+    let currentProduct = null;
+
+    const ICON_SVG = `<svg viewBox="0 0 24 24" fill="#FFD600"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>`;
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const order = document.getElementById('orderSelect').value;
+
+      let filtered = PRODUCTS.filter(p => {
+        const matchCat = currentCategory === 'todos' || p.cat === currentCategory;
+        const matchSearch = p.name.toLowerCase().includes(search) || p.cat.toLowerCase().includes(search);
+        const matchPrice = p.price <= maxPrice;
+        const matchPromo = currentPromo === 'todos' || p.promo;
+        return matchCat && matchSearch && matchPrice && matchPromo;
+      });
+
+      if (order === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (order === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (order === 'name-asc') filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+      document.getElementById('countSpan').textContent = filtered.length;
+
+      const catNames = { proteinas: 'Proteínas', creatina: 'Creatina', quemadores: 'Quemadores', vitaminas: 'Vitaminas', 'pre-entrenos': 'Pre-Entrenos' };
+
+      grid.innerHTML = filtered.length === 0
+        ? `<div style="grid-column:1/-1;text-align:center;padding:4rem;color:#555;font-size:14px;letter-spacing:1px;text-transform:uppercase;">No se encontraron productos</div>`
+        : filtered.map(p => `
+    <div class="prod-card" onclick="openModal(${p.id})">
+      ${p.promo ? '<div class="promo-badge">Promoción</div>' : p.new ? '<div class="new-badge">Nuevo</div>' : ''}
+      <div class="prod-img">
+  ${p.img
+            ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">`
+            : ICON_SVG}
+</div>
+      <div class="prod-info">
+        <div class="prod-cat">${catNames[p.cat] || p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div style="display:flex;align-items:baseline;gap:4px">
+          <div class="prod-price">S/${p.price}</div>
+          ${p.oldPrice ? `<span class="prod-price-old">S/${p.oldPrice}</span>` : ''}
+        </div>
+        <button class="prod-add ${cart.find(c => c.id === p.id) ? 'added' : ''}" onclick="event.stopPropagation();addToCart(${p.id})">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          ${cart.find(c => c.id === p.id) ? 'Agregado' : 'Agregar'}
+        </button>
+      </div>
+    </div>`).join('');
+    }
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('[onclick*="setCategory"]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    }
+
+    function setPromo(val, btn) {
+      currentPromo = val;
+      btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    }
+
+    function updatePrice(val) {
+      maxPrice = parseInt(val);
+      document.getElementById('priceVal').textContent = 'S/ ' + val;
+      applyFilters();
+    }
+
+    function applyFilters() { renderProducts() }
+
+    function addToCart(id) {
+      const p = PRODUCTS.find(x => x.id === id);
+      const existing = cart.find(x => x.id === id);
+      if (existing) existing.qty++;
+      else cart.push({ ...p, qty: 1 });
+      updateCartUI();
+      showToast('¡' + p.name + ' agregado!');
+      renderProducts();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(x => x.id !== id);
+      updateCartUI();
+      renderProducts();
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(x => x.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) removeFromCart(id);
+      else updateCartUI();
+    }
+
+    function clearCart() {
+      cart = [];
+      updateCartUI();
+      renderProducts();
+    }
+
+    function updateCartUI() {
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      document.getElementById('cartBadge').textContent = cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('cartTotal').textContent = 'S/ ' + total;
+      const container = document.getElementById('cartItems');
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="cart-empty"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p style="font-size:14px;letter-spacing:1px;text-transform:uppercase">Tu carrito está vacío</p></div>`;
+      } else {
+        container.innerHTML = cart.map(i => `
+      <div class="cart-item">
+        <div class="cart-item-img">
+  ${i.img
+            ? `<img src="${i.img}" alt="${i.name}" style="width:100%;height:100%;object-fit:contain;">`
+            : ICON_SVG}
+</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${i.name}</div>
+          <div class="cart-item-price">S/ ${i.price * i.qty}</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="changeQty(${i.id},-1)">−</button>
+            <span class="qty-num">${i.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
+          </div>
+        </div>
+        <button class="cart-remove" onclick="removeFromCart(${i.id})">✕</button>
+      </div>`).join('');
+      }
+    }
+
+    function toggleCart() {
+      document.getElementById('cartPanel').classList.toggle('open');
+      document.getElementById('cartOverlay').classList.toggle('open');
+    }
+
+    function sendToWhatsApp() {
+      if (cart.length === 0) { showToast('Tu carrito está vacío'); return; }
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      let msg = '🦁 *PEDIDO LION NUTRITION*\n\n';
+      cart.forEach(i => { msg += `• ${i.name} x${i.qty} — S/ ${i.price * i.qty}\n`; });
+      msg += `\n💰 *Total: S/ ${total}*\n\n📦 Por favor confirmar disponibilidad y coordinar envío.\n¡Gracias!`;
+      window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function openModal(id) {
+      currentProduct = PRODUCTS.find(p => p.id === id);
+      if (!currentProduct) return;
+      const catNames = { proteinas: 'Proteínas', creatina: 'Creatina', quemadores: 'Quemadores', vitaminas: 'Vitaminas', 'pre-entrenos': 'Pre-Entrenos' };
+      document.getElementById('modalCat').textContent = catNames[currentProduct.cat] || currentProduct.cat;
+      document.getElementById('modalName').textContent = currentProduct.name;
+      document.getElementById('modalDesc').textContent = currentProduct.desc;
+      document.getElementById('modalPrice').textContent = 'S/ ' + currentProduct.price + (currentProduct.oldPrice ? ' (Antes S/ ' + currentProduct.oldPrice + ')' : '');
+      document.getElementById('modalImg').innerHTML = currentProduct.img
+        ? `<img src="${currentProduct.img}" alt="${currentProduct.name}" style="width:100%;height:100%;object-fit:contain;padding:20px;">`
+        : ICON_SVG;
+      document.getElementById('modalOverlay').classList.add('open');
+    }
+
+    function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalBtn(); }
+    function closeModalBtn() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+    function addFromModal() {
+      if (!currentProduct) return;
+      addToCart(currentProduct.id);
+      closeModalBtn();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    renderProducts();
+    updateCartUI();
+  </script>
+
+</body>
+
+</html>
