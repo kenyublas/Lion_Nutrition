@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Admin — Suplementos</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+
+            --surface: #111111;
+
+            --border: #2a2a2a;
+
+            --text: #ffffff;
+
+            --muted: #888888;
+
+            --accent: #FFD600;
+
+            --accent-text: #0a0a0a;
+
+            --success-bg: #1a2e0a;
+
+            --success-text: #7bc142;
+
+            --danger: #e24b4a;
+
+            --font: 'Barlow', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* LOGIN */
+        #loginScreen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: var(--surface);
+            border: 0.5px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 360px;
+            text-align: center;
+        }
+
+        .login-card h1 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-card p {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .login-card input {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 14px;
+            padding: 10px 12px;
+            border: 0.5px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .login-card input:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 11px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            opacity: 0.85;
+        }
+
+        .login-error {
+            font-size: 13px;
+            color: var(--danger);
+            margin-top: 8px;
+            display: none;
+        }
+
+        /* ADMIN */
+        #adminScreen {
+            display: none;
+        }
+
+        .topbar {
+            background: var(--surface);
+            border-bottom: 0.5px solid var(--border);
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .topbar .logo {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .topbar .right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar .right span {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .btn-logout {
+            font-size: 13px;
+            padding: 6px 14px;
+            border: 0.5px solid var(--border);
+            border-radius: 8px;
+            background: none;
+            cursor: pointer;
+            color: var(--muted);
+        }
+
+        .btn-logout:hover {
+            background: var(--bg);
+        }
+
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat {
+            background: var(--surface);
+            border: 0.5px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+        }
+
+        .stat p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat strong {
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 780px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            border: 0.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 9px 12px;
+            font-size: 14px;
+            font-family: var(--font);
+            border: 0.5px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            border-color: var(--accent);
+        }
+
+        .field textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .img-drop {
+            border: 1.5px dashed var(--border);
+            border-radius: 10px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color .2s;
+        }
+
+        .img-drop:hover {
+            border-color: #999;
+        }
+
+        .img-drop p {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .img-drop small {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .img-preview {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: none;
+            margin-bottom: 8px;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 11px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .btn-save:hover {
+            opacity: 0.85;
+        }
+
+        .success-msg {
+            display: none;
+            background: var(--success-bg);
+            color: var(--success-text);
+            font-size: 13px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Lista de productos */
+        .search-bar {
+            margin-bottom: 12px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 13px;
+            border: 0.5px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            font-family: var(--font);
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .product-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .product-list::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .product-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 12px;
+            border: 0.5px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
+        }
+
+        .product-item img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .product-thumb-placeholder {
+            width: 52px;
+            height: 52px;
+            background: var(--border);
+            border-radius: 8px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+            font-size: 18px;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-info strong {
+            font-size: 13px;
+            font-weight: 500;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-info span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .product-price {
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .btn-del {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--danger);
+            font-size: 18px;
+            line-height: 1;
+            padding: 2px 4px;
+            flex-shrink: 0;
+        }
+
+        .btn-del:hover {
+            opacity: 0.7;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .cat-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: #f0ede8;
+            color: #666;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== LOGIN ===== -->
+    <div id="loginScreen">
+        <div class="login-card">
+            <h1>Panel de administración</h1>
+            <p>Ingresa con tu contraseña para gestionar productos</p>
+            <input type="text" id="loginUser" placeholder="Usuario" />
+            <input type="password" id="loginPass" placeholder="Contraseña"
+                onkeydown="if(event.key==='Enter') doLogin()" />
+            <button class="btn-login" onclick="doLogin()">Ingresar</button>
+            <p class="login-error" id="loginError">Usuario o contraseña incorrectos</p>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN PANEL ===== -->
+    <div id="adminScreen">
+        <div class="topbar">
+            <span class="logo">&#9679; Panel Admin</span>
+            <div class="right">
+                <span id="userLabel"></span>
+                <button class="btn-logout" onclick="doLogout()">Salir</button>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="stats">
+                <div class="stat">
+                    <p>Total productos</p><strong id="statTotal">0</strong>
+                </div>
+                <div class="stat">
+                    <p>Último agregado</p><strong id="statNew" style="font-size:14px; font-weight:500;">—</strong>
+                </div>
+                <div class="stat">
+                    <p>Categorías</p><strong id="statCat">0</strong>
+                </div>
+            </div>
+
+            <div class="grid">
+                <!-- FORMULARIO -->
+                <div class="card">
+                    <h2>Agregar nuevo producto</h2>
+
+                    <div class="field">
+                        <label>Nombre del producto *</label>
+                        <input type="text" id="pNombre" placeholder="Ej: Proteína Whey Gold 1kg" />
+                    </div>
+
+                    <div class="field">
+                        <label>Precio (S/.) *</label>
+                        <input type="number" id="pPrecio" placeholder="89.90" step="0.01" min="0" />
+                    </div>
+
+                    <div class="field">
+                        <label>Categoría</label>
+                        <select id="pCategoria">
+                            <option>Proteínas</option>
+                            <option>Pre-Entrenos</option>
+                            <option>Vitaminas</option>
+                            <option>Creatina</option>
+                            <option>Quemadores</option>
+                            <option>Aminoácidos</option>
+                            <option>Barras y snacks</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Descripción</label>
+                        <textarea id="pDesc"
+                            placeholder="Sabores disponibles, beneficios principales, tamaño..."></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>Imagen del producto</label>
+                        <img id="imgPreview" class="img-preview" alt="Vista previa" />
+                        <div class="img-drop" id="imgDrop" onclick="document.getElementById('imgInput').click()">
+                            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24" style="margin:0 auto;color:#bbb">
+                                <path d="M4 16l4-4 4 4 4-6 4 6" />
+                                <rect x="2" y="3" width="20" height="18" rx="2" />
+                            </svg>
+                            <p>Haz clic o arrastra una imagen aquí</p>
+                            <small>JPG, PNG, WEBP — máx. 5MB</small>
+                        </div>
+                        <input type="file" id="imgInput" accept="image/*" style="display:none"
+                            onchange="handleImgFile(this.files[0])" />
+                    </div>
+
+                    <button class="btn-save" onclick="guardarProducto()">Guardar producto</button>
+                    <div class="success-msg" id="successMsg">✓ Producto guardado y publicado</div>
+                </div>
+
+                <!-- LISTA -->
+                <div class="card">
+                    <h2>Productos publicados</h2>
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="renderList()" />
+                    </div>
+                    <div class="product-list" id="productList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ══ SUPABASE CONFIG ══ */
+        const SUPA_URL = 'https://gcsjiqkggkjxbrvhemhy.supabase.co';
+        const SUPA_KEY = 'sb_publishable_g4GWTc2hXoAwVPAcbyIwag_15_N3_vx';
+        const TABLA = 'productos';
+
+        /* ══ CREDENCIALES ADMIN ══ */
+        const ADMIN_USER = 'lionadmin';   // ← cambia el usuario
+        const ADMIN_PASS = 'lion2024';    // ← cambia la contraseña
+
+        let productos = [];
+        let imgBase64 = null;
+
+        /* ══ HELPERS SUPABASE ══ */
+        async function sbFetch(path, options = {}) {
+            const res = await fetch(`${SUPA_URL}/rest/v1/${path}`, {
+                headers: {
+                    'apikey': SUPA_KEY,
+                    'Authorization': `Bearer ${SUPA_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': options.prefer || ''
+                },
+                ...options
+            });
+            if (!res.ok) {
+                const err = await res.text();
+                throw new Error(err);
+            }
+            const text = await res.text();
+            return text ? JSON.parse(text) : null;
+        }
+
+        /* ══ LOGIN ══ */
+        if (sessionStorage.getItem('lion_admin_auth') === 'ok') {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminScreen').style.display = 'block';
+            cargarProductos();
+        }
+
+        function doLogin() {
+            const u = document.getElementById('loginUser').value.trim();
+            const p = document.getElementById('loginPass').value;
+            if (u === ADMIN_USER && p === ADMIN_PASS) {
+                sessionStorage.setItem('lion_admin_auth', 'ok');
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminScreen').style.display = 'block';
+                document.getElementById('userLabel').textContent = u;
+                cargarProductos();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function doLogout() {
+            // 1. Eliminamos la sesión para que no puedan volver atrás
+            sessionStorage.removeItem('lion_admin_auth');
+
+            // 2. Redirigimos a la tienda o al index
+            // Asegúrate de que el nombre del archivo coincida (ej: index.html o lion_nutrition_tienda.html)
+            window.location.href = 'lion_nutrition_tienda.html';
+        }
+
+
+        /* ══ IMAGEN ══ */
+        function handleImgFile(file) {
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) { alert('La imagen supera 5MB. Usa una más pequeña.'); return; }
+            const reader = new FileReader();
+            reader.onload = e => {
+                imgBase64 = e.target.result;
+                const preview = document.getElementById('imgPreview');
+                preview.src = imgBase64;
+                preview.style.display = 'block';
+                document.getElementById('imgDrop').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        const drop = document.getElementById('imgDrop');
+        drop.addEventListener('dragover', e => { e.preventDefault(); drop.style.borderColor = '#FFD600'; });
+        drop.addEventListener('dragleave', () => { drop.style.borderColor = ''; });
+        drop.addEventListener('drop', e => {
+            e.preventDefault(); drop.style.borderColor = '';
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) handleImgFile(file);
+        });
+
+        /* ══ GUARDAR EN SUPABASE ══ */
+        async function guardarProducto() {
+            const nombre = document.getElementById('pNombre').value.trim();
+            const precio = parseFloat(document.getElementById('pPrecio').value);
+            if (!nombre) { alert('El nombre del producto es obligatorio.'); return; }
+            if (!precio || precio <= 0) { alert('Ingresa un precio válido.'); return; }
+
+            const btnSave = document.querySelector('.btn-save');
+            btnSave.textContent = 'Guardando...';
+            btnSave.disabled = true;
+
+            try {
+                await sbFetch(TABLA, {
+                    method: 'POST',
+                    prefer: 'return=minimal',
+                    body: JSON.stringify({
+                        nombre,
+                        precio,
+                        categoria: document.getElementById('pCategoria').value,
+                        descripcion: document.getElementById('pDesc').value.trim(),
+                        imagen: imgBase64 || null
+                    })
+                });
+
+                await cargarProductos();
+                resetForm();
+
+                const msg = document.getElementById('successMsg');
+                msg.style.display = 'block';
+                setTimeout(() => msg.style.display = 'none', 3000);
+            } catch (e) {
+                alert('Error al guardar: ' + e.message);
+            } finally {
+                btnSave.textContent = 'Guardar producto';
+                btnSave.disabled = false;
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('pNombre').value = '';
+            document.getElementById('pPrecio').value = '';
+            document.getElementById('pDesc').value = '';
+            imgBase64 = null;
+            document.getElementById('imgPreview').style.display = 'none';
+            document.getElementById('imgDrop').style.display = 'block';
+            document.getElementById('imgInput').value = '';
+        }
+
+        /* ══ ELIMINAR DE SUPABASE (Versión Optimizada) ══ */
+        async function eliminarProducto(id) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este producto?')) return;
+
+            try {
+                await sbFetch(`${TABLA}?id=eq.${id}`, {
+                    method: 'DELETE'
+                });
+
+                alert('Producto eliminado con éxito');
+                await cargarProductos();
+
+            } catch (e) {
+                console.error("Error al borrar:", e);
+                alert('Error al eliminar: ' + e.message);
+            }
+        }
+
+        /* ══ CARGAR DESDE SUPABASE ══ */
+        async function cargarProductos() {
+            try {
+                const data = await sbFetch(`${TABLA}?order=fecha_creacion.desc`);
+                productos = data || [];
+                renderList();
+            } catch (e) {
+                console.error('Error al cargar:', e);
+                productos = [];
+                renderList();
+            }
+        }
+
+        /* ══ RENDER ══ */
+        function renderList() {
+            const query = (document.getElementById('searchInput')?.value || '').toLowerCase();
+            const filtrados = query
+                ? productos.filter(p => p.nombre.toLowerCase().includes(query) || p.categoria.toLowerCase().includes(query))
+                : productos;
+
+            const cats = new Set(productos.map(p => p.categoria));
+            document.getElementById('statTotal').textContent = productos.length;
+            document.getElementById('statNew').textContent = productos[0]
+                ? new Date(productos[0].fecha_creacion).toLocaleDateString('es-PE', { day: '2-digit', month: 'short' })
+                : '—';
+            document.getElementById('statCat').textContent = cats.size;
+
+            const list = document.getElementById('productList');
+            if (!filtrados.length) {
+                list.innerHTML = `<div class="empty-state">${productos.length ? 'No hay resultados.' : 'Aún no hay productos.<br>Agrega el primero.'}</div>`;
+                return;
+            }
+            list.innerHTML = filtrados.map(p => `
+      <div class="product-item">
+        ${p.imagen
+                    ? `<img src="${p.imagen}" alt="${p.nombre}" />`
+                    : `<div class="product-thumb-placeholder">📦</div>`}
+        <div class="product-info">
+          <strong>${p.nombre}</strong>
+          <span class="cat-badge">${p.categoria}</span>
+        </div>
+        <span class="product-price">S/. ${parseFloat(p.precio).toFixed(2)}</span>
+        <button class="btn-del" onclick="eliminarProducto(${p.id})" title="Eliminar">×</button>
+      </div>
+    `).join('');
+        }
+    </script>
+</body>
+
+</html>
