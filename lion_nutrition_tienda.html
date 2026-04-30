@@ -880,14 +880,20 @@
       <a href="index.html">Inicio</a>
       <a href="lion_nutrition_tienda.html" class="active">Tienda</a>
     </div>
-    <button class="nav-cart-btn" onclick="toggleCart()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 01-8 0" />
-      </svg>
-      Carrito <span class="badge" id="cartBadge">0</span>
-    </button>
+<div style="display:flex;align-items:center;gap:10px;">
+      <button onclick="abrirLoginAdmin()"
+        style="background:#FFD600;color:#0a0a0a;border:none;padding:8px 16px;font-family:'Barlow',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">
+        LOGIN
+      </button>
+      <button class="nav-cart-btn" onclick="toggleCart()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 01-8 0" />
+        </svg>
+        Carrito <span class="badge" id="cartBadge">0</span>
+      </button>
+    </div>
   </nav>
 
   <div class="shop-hero">
@@ -1003,108 +1009,52 @@
         d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
     </svg>
   </div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    
     const WA = '51929504847';
+    const SUPABASE_URL = 'https://gcsjiqkggkjxbrvhemhy.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_g4GWTc2hXoAwVPAcbyIwag_15_N3_vx';
+    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    const PRODUCTS = [
-      { id: 1, name: 'GOLD STANDAR 5 LIBRAS', cat: 'proteinas', price: 349, img: 'img/proteina_gold_standar.png', desc: 'proteina whey de la mas alta calidad.', promo: false, new: true },
-      { id: 2, name: 'PROSTAR WHEY 5 LIBRAS', cat: 'proteinas', price: 289, img: 'img/proteina_prostar_whey.png', oldPrice: 299, desc: 'Proteina ideal para tu etapa de ganancia de tamaño con calidad de producto.', promo: true, new: false },
-      { id: 3, name: 'INSANE WHEY 5 LIBRAS', cat: 'proteinas', price: 259, img: 'img/proteina_insane_whey.png', desc: 'Proteína aislada de máxima pureza. 90% proteína por porción. Sin lactosa, ideal para personas sensibles.', promo: false, new: false },
-      { id: 4, name: 'NITROTECH 5 LIBRAS', cat: 'proteinas', price: 269, img: 'img/proteina_nitrotech.png', desc: 'proteina whey de la mas alta calidad.', promo: true, new: false },
-      { id: 5, name: 'GOLD WHEY 5 LIBRAS', cat: 'proteinas', price: 239, img: 'img/proteina_gold_whey.png', desc: 'proteina ideal para tu etapa de ganancia de volumen.', promo: true, new: false },
-      { id: 6, name: 'INSANE WHEY 10 LIBRAS', cat: 'proteinas', price: 379, img: 'img/proteina_insane_whey10.png', desc: 'proteina whey para etapa de volumen.', promo: false, new: false },
-      { id: 7, name: 'ISO 100 5 LIBRAS', cat: 'proteinas', price: 529, img: 'img/proteina_iso_100.png', desc: 'proteina why isolatada de la mas alta calidad.', promo: true, new: false },
-      { id: 8, name: 'ISO XP 5 LIBRAS', cat: 'proteinas', price: 369, img: 'img/proteina_iso_xp.png', desc: ' isolatada de calidad para gente con problemas gastricos.', promo: true, new: false },
-      { id: 9, name: 'INSANE WHEY 10 LIBRAS', cat: 'proteinas', price: 329, img: 'img/proteina_insane_whey10_libras.png', desc: 'buen sabor calidad y precio.', promo: false, new: true },
-      { id: 10, name: 'DIESEL 10', cat: 'proteinas', price: 399, img: 'img/proteina_isolatada_diesel.png', desc: 'PROTEINA WHEY ISOLATADA DE LA MAS ALTA CALIDAD.', promo: true, new: false },
-      { id: 11, name: 'ISO ELITE 5 LIBRAS', cat: 'proteinas', price: 299, img: 'img/proteina_isolatada_iso.png', desc: 'HIDROLIZADA E ISOLATADA PARA TU DIA A DIA', promo: false, new: true },
-      { id: 12, name: 'CARNIVOR 5 LIBRAS', cat: 'proteinas', price: 299, img: 'img/proteina_isolatada_carnivor.png', desc: 'PROTEINA ISOLATADA UN CLASICO PARA GENTE NO TOLERANTE AL LACTEO.', promo: true, new: false },
-      { id: 13, name: 'ISO GOLD 5 LIBRAS', cat: 'proteinas', price: 329, img: 'img/proteina_isolatada_iso_gold.png', desc: ' PROTEINA ISOLATADA  WHEY DE LA MAS ALTA CALIDAD ISOLATADA.', promo: false, new: true },
-      { id: 14, name: 'CHOCOLATE CBUM RAW', cat: 'proteinas', price: 420, img: 'img/proteina_isolatada_chocolate.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA', promo: true, new: false },
-      { id: 15, name: 'PASTEL DE CUMPLE CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_pastel.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA', promo: true, new: false },
-      { id: 16, name: 'MENTA CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_cbum.png', desc: 'PROTEINA WHEY DE LA MAS ALTA CALIDAD ISOLATADA', promo: true, new: false },
-      { id: 17, name: 'VAINILLA CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_vainilla_cbum.png', desc: 'LA MEJOR PROTEINA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA.', promo: true, new: false },
-      { id: 18, name: 'MAPLE CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteinas_isolatada_maple.png', desc: 'PROTEINA WHEY DE LA MAS ALTA CALIDAD ISOLATADA.', promo: true, new: false },
-      { id: 19, name: 'FRESA CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_fresa.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA .', promo: true, new: false },
-      { id: 20, name: 'GALLETAS ANIMALITOS CBUM RAW', cat: 'proteinas', price: 219, img: 'img/proteina_isolatada_galleta.png', desc: 'LA MEJOR PROTEINA ISOLATADA DEL 2023 CBUM RAW ALTA CALIDAD Y CONSISTENCIA.', promo: true, new: false },
-      { id: 21, name: 'CREATINA RAW 100 SERVICIOS', cat: 'creatina', price: 189, img: 'img/creatina_1.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: true, new: false },
-      { id: 22, name: 'CREATINA RAW 30 SERVICIOS', cat: 'creatina', price: 89, img: 'img/creatina_raw.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: true, new: false },
-      { id: 23, name: 'CREATINA ON 300 GR', cat: 'creatina', price: 119, img: 'img/creatina_on_300.png', desc: 'CREATINA MICROLIZADA DE LA MAS ALTA CALIDAD .', promo: false, new: true },
-      { id: 24, name: 'CREATINA ULTIMATE 1 KILO', cat: 'creatina', price: 229, img: 'img/creatina_ultimate.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: false, new: true },
-      { id: 25, name: 'CREATINA ULTIMATE 300 GR', cat: 'creatina', price: 89, img: 'img/creatina_ultimate_300.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE.', promo: false, new: true },
-      { id: 26, name: 'CREATINA ON 600 GR', cat: 'creatina', price: 199, img: 'img/creatina_on_600.png', desc: 'CREATINA MICROLIZADA DE LA MAS ALTA CALIDAD .', promo: false, new: true },
-      { id: 27, name: 'CREATINA DRAGON PHARMA 300 GR', cat: 'creatina', price: 89, img: 'img/creatina_dragon.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD MONOHYDRATE .', promo: false, new: true },
-      { id: 28, name: 'CREATINA KEVIN L 500GR', cat: 'creatina', price: 120, img: 'img/creatina_kevin.png', desc: 'CREATINA STANDAR MONOHYDRATE .', promo: false, new: true },
-      { id: 29, name: 'CREATINA MY PROTE CREAPURE 250 GR', cat: 'creatina', price: 99, img: 'img/creatina_creapure.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD CON SELLO CREAPURE.', promo: false, new: true },
-      { id: 30, name: 'CREATINA ONE SCIENCE 300 GR', cat: 'creatina', price: 99, img: 'img/creatina_science.png', desc: 'CREATINA DE LA MAS ALTA CALIDAD MONOHYDRATE .', promo: false, new: true },
-      { id: 31, name: 'CREATINA KEVIN L 300 GR', cat: 'creatina', price: 89, img: 'img/creatina_kevin_300.png', desc: 'CREATINA STANDAR MONOHYDRATE .', promo: false, new: true },
-      { id: 32, name: 'CREATINA MY PROTE 250 GR', cat: 'creatina', price: 89, img: 'img/creatina_prote.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD .', promo: false, new: true },
-      { id: 33, name: 'CREATINA P OUT 500 GR', cat: 'creatina', price: 120, img: 'img/creatina_p_out.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD MONOHYDRATE .', promo: false, new: true },
-      { id: 34, name: 'CREATINA P OUT  1.1 KILO ', cat: 'creatina', price: 199, img: 'img/creatina_p_out_1.png', desc: 'CREATINA STANDAR MONOHYDRATE .', promo: false, new: true },
-      { id: 35, name: 'CREATINA M5 250 GR', cat: 'creatina', price: 99, img: 'img/creatina_m5.png', desc: 'CREATINA  DE LA MAS ALTA CALIDAD.', promo: false, new: true },
-      { id: 36, name: 'DEMON BCA 60 SERVICIOS', cat: 'otros', price: 139, img: 'img/eaa_demon.png', desc: 'AMINO DE ALTA CALIDAD.', promo: false, new: true },
-      { id: 37, name: 'HYDRO BCA', cat: 'otros', price: 260, img: 'img/eaa_hydro.png', desc: 'LOS AMINOACIDOS DE ALTA CALIDAD.', promo: false, new: true },
-      { id: 38, name: 'CREATINA MY PROTE 250 GR', cat: 'creatina', price: 235, img: 'img/creatina_my_prote.png', desc: 'LOS MEJORES AMINOS ESCENCIALES PARA EL CUERPO.', promo: false, new: true },
-      { id: 39, name: 'TESTROL ORIGINAL', cat: 'otros', price: 139, img: 'img/testo_testrol.png', desc: 'PRECURSOR DE TESTOSTERONA DE MANERA NATURAL.', promo: false, new: true },
-      { id: 40, name: 'TESTROL GOLD', cat: 'otros', price: 189, img: 'img/testo_gold.png', desc: 'ELEVA TU LIBIDO Y FUERZA.', promo: false, new: true },
-      { id: 41, name: 'MULTIVITAMINICO CON TESTO', cat: 'otros', price: 159, img: 'img/testo_multivitaminico.png', desc: 'LAS MEJORES VITAMINAS ESCENCIALES PARA EL CUERPO.', promo: false, new: true },
-      { id: 42, name: 'LIPODREAM 90 PASTILLAS', cat: 'quemadores', price: 189, img: 'img/quemadores_lipodream.png', desc: 'QUEMADOR CON ALTA CONCENTRACIÓN.', promo: false, new: true },
-      { id: 43, name: 'LIVER RX', cat: 'quemadores', price: 159, img: 'img/quemadores_liver.png', desc: 'MULTIVITAMINICO Y PROTECTOR HEPATICO.', promo: false, new: true },
-      { id: 44, name: 'LIPOBLACK', cat: 'quemadores', price: 139, img: 'img/quemadores_lipoblack.png', desc: 'QUEMADOR STANDAR.', promo: false, new: true },
-      { id: 45, name: 'ISOLATE SASCHA', cat: 'otros', price: 319, img: 'img/sascha_fitness.png', desc: 'PROTEINA ISOLATADA DE ALTA CALIDAD.', promo: false, new: true },
-      { id: 46, name: 'RESTORE', cat: 'otros', price: 249, img: 'img/sascha_restore.png', desc: 'CORTISOL NIGHT SUPPORT.', promo: false, new: true },
-      { id: 47, name: 'COLLAGENO', cat: 'otros', price: 249, img: 'img/sascha_collageno.png', desc: 'COLAGENO 100 CON SABOR.', promo: false, new: true },
-      { id: 48, name: 'BCAA', cat: 'otros', price: 249, img: 'img/sascha_bcaa.png', desc: 'AMINOACIDOS DE ALTA CALIDAD.', promo: false, new: true },
-      { id: 49, name: 'FIT 9', cat: 'otros', price: 249, img: 'img/fit_9.png', desc: 'QUEMADOR DE GRASA DE ALTA CALIDAD Y CONCENTRACION.', promo: false, new: true },
-      { id: 50, name: 'OMEGA 3 REVIVE', cat: 'otros', price: 189, img: 'img/omega_3_revive.png', desc: 'AUMENTAR LA FUERZA Y RESISTENCIA DEL CUERPO.', promo: false, new: true },
-      { id: 51, name: 'CITRULINA INSANE', cat: 'otros', price: 119, img: 'img/citrulina_insane.png', desc: 'EXPLOTA TU RENDIMIENTO FISICO.', promo: false, new: true },
-      { id: 52, name: 'BETALINA INSANE', cat: 'otros', price: 119, img: 'img/betalina_insane.png', desc: 'REDUCE LA FATIGA MUSCULAR.', promo: false, new: true },
-      { id: 53, name: 'ARGINA P OUT', cat: 'otros', price: 149, img: 'img/argina_p.png', desc: 'REDUCE LA FATIGA MUSCULAR, MEJORA LA SALUD CARDIOVASCULAR.', promo: false, new: true },
-      { id: 54, name: 'CLEMBUTERL 50 TABLET', cat: 'otros', price: 189, img: 'img/caramelos_50.png', desc: 'SECADO RAPIDO.', promo: false, new: true },
-      { id: 55, name: 'ANAVAR 100 PASTILLAS', cat: 'otros', price: 249, img: 'img/caramelos_100.png', desc: 'AUMENTAR LA CANTIDAD DE PROTEINAS PRODUCIDA POR EL CUERPO.', promo: false, new: true },
-      { id: 56, name: 'WISTROL', cat: 'otros', price: 235, img: 'img/caramelos_wistrol.png', desc: 'AUMENTAR LA FUERZA Y RESISTENCIA DEL CUERPO.', promo: false, new: true },
-      { id: 57, name: 'ISOCOOL', cat: 'proteinas', price: 329, img: 'img/proteina_isolatada_isocool.png', desc: 'ISOLATADA DE GRAN CALIDAD.', promo: false, new: true },
-      { id: 58, name: 'CBUM ISOLATE 5 LB', cat: 'proteinas', price: 449, img: 'img/proteina_isolatada_cbum_isolate.png', desc: 'ISOLATADA DE GRAN CALIDAD.', promo: false, new: true },
-      { id: 59, name: 'ANIMAL PACK PASTILLAS', cat: 'otros', price: 269, img: 'img/pastillas_animal.png', desc: 'MULTIVITAMINICO.', promo: false, new: true },
-      { id: 60, name: 'ANIMAL PACK POLVO', cat: 'otros', price: 269, img: 'img/animal_pack_polvo.png', desc: 'MULTIVITAMINICO POLVO.', promo: false, new: true },
-      { id: 61, name: 'ANIMAL STACK', cat: 'otros', price: 269, img: 'img/animal_stack.png', desc: 'HORMONE BOOSTER.', promo: false, new: true },
-      { id: 62, name: 'L CARNITINA RC', cat: 'otros', price: 99, img: 'img/carnitina_rc.png', desc: 'CARNITINE.', promo: false, new: true },
-      { id: 63, name: 'COLAGENO REVIVE', cat: 'otros', price: 169, img: 'img/colageno_revive.png', desc: 'COLAGENO NATURAL.', promo: false, new: true },
-      { id: 64, name: 'QUEMADOR DE GRASA', cat: 'quemadores', price: 149, img: 'img/quemadores_de_grasa.png', desc: 'QUEMADOR DE GRASA.', promo: false, new: true },
-      { id: 65, name: 'SHAKER ORIGINAL INSANE', cat: 'otros', price: 29.99, img: 'img/shaker_original_insane.png', desc: 'SHAKER ACREDITADO.', promo: false, new: true },
-      { id: 66, name: 'SHAKER 3 CUERPOS INSANE', cat: 'otros', price: 39.99, img: 'img/shaker_3_cuerpos_insane.png', desc: 'SHAKER 3 CUERPOS.', promo: false, new: true },
-      { id: 67, name: 'SHAKER RAW CBUM', cat: 'otros', price: 49.99, img: 'img/SHAKER_RAW_CBUM.png', desc: 'SHAKER.', promo: false, new: true },
-      { id: 68, name: 'INSANE LABZ CREA', cat: 'creatina', price: 89, img: 'img/creatina_insane.png', desc: 'CREATINA 100% PURA.', promo: false, new: true },
-      { id: 69, name: 'INSANE LABZ CREA', cat: 'creatina', price: 199, img: 'img/creatina_insane_1k.png', desc: 'CREATINA DE 1 KG .', promo: false, new: true },
-      { id: 70, name: 'PSHYCHPATA 400 MG', cat: 'otros', price: 189, img: 'img/prewrok.png', desc: 'PREWROK.', promo: false, new: true },
-      { id: 71, name: 'C4 60 SERVICIOS', cat: 'pre-entrenos', price: 179, img: 'img/preentreno_prework.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 72, name: 'C4 30 SERVICIOS', cat: 'pre-entrenos', price: 150, img: 'img/preentreno_c4.png', desc: 'ENERGY,EDDURANCE,PUNCH.', promo: false, new: true },
-      { id: 73, name: 'TOTAL WAR', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_total.png', desc: 'ENFOQUE, ENERGIA.', promo: false, new: true },
-      { id: 74, name: 'GOLD 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_gold.png', desc: 'ENERGY,ENDURANCE,PUNCH', promo: false, new: true },
-      { id: 75, name: 'RED 35 SERVICIOS', cat: 'pre-entrenos', price: 149, img: 'img/preentreno_red.png', desc: 'LOCURA PICAZON A FULL', promo: false, new: true },
-      { id: 76, name: 'SAW 35 SERVICIOS', cat: 'pre-entrenos', price: 175, img: 'img/preentreno_saw.png', desc: 'ENFOQUE, ENERGIA.', promo: false, new: true },
-      { id: 77, name: 'TEST 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_test.png', desc: 'ENERGY, ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 78, name: 'RED HELLBOY 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_red_hellboy.png', desc: 'LOCURA PICAZON A FULL.', promo: false, new: true },
-      { id: 79, name: 'IM GOD 35 SERVICIOS', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_god.png', desc: 'ENERGY, ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 80, name: 'THAVAGE CBUM', cat: 'pre-entrenos', price: 179, img: 'img/preentreno_thavage.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 81, name: 'THUPER CBUM', cat: 'pre-entrenos', price: 229, img: 'img/preentreno_thuper.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 82, name: 'XTREM RAW', cat: 'pre-entrenos', price: 189, img: 'img/preentreno_xtrem.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 83, name: 'THE CURSE', cat: 'pre-entrenos', price: 199, img: 'img/preentreno_curse.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 84, name: 'RUSH BSN', cat: 'pre-entrenos', price: 189, img: 'img/preentreno_rush.png', desc: 'PICAZÓN A FULL Y PODER.', promo: false, new: true },
-      { id: 85, name: 'B NOX', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_b.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 86, name: 'NITRAFLEX 30 SER', cat: 'pre-entrenos', price: 179, img: 'img/preentreno_nitraflex.png', desc: 'ENERGY,ENDURANCE,PUNCH sin bajon.', promo: false, new: true },
-      { id: 87, name: 'NITRAFLEX 15 SER', cat: 'pre-entrenos', price: 139, img: 'img/preentreno_nitraflex_15.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 88, name: 'B NOX', cat: 'pre-entrenos', price: 169, img: 'img/preentreno_b_nox.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 89, name: 'PRO FLEX 5000', cat: 'otros', price: 159, img: 'img/colageno_pro.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 90, name: 'ESSENTIAL PRE WORKOUT CBUM RAW', cat: 'pre-entrenos', price: 159, img: 'img/preentreno_essential.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true }, 
-      { id: 91, name: 'NITRIX 2.0', cat: 'pre-entrenos', price: 149, img: 'img/preentreno_nitrix.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true }, 
-      { id: 92, name: 'L-CITRULINE MALATE 2:1', cat: 'pre-entrenos', price: 189, img: 'img/preentreno_l.png', desc: 'ENERGY,ENDURANCE,PUNCH.', promo: false, new: true },
-      { id: 93, name: 'EVP-AQ GLYCEROL', cat: 'otros', price: 129, img: 'img/preentreno_evp.png', desc: 'ENFOQUE,ENERGIA A FULL.', promo: false, new: true },
-      { id: 94, name: 'MONSTER TEST', cat: 'otros', price: 189, img: 'img/testo_monster.png', desc: 'INCREMENTO CONSTANTE DE TESTOSTERONA EN 30 DÍAS.', promo: false, new: true },
-    ];
+  // Borra todo lo que está entre los corchetes [ ]
+let PRODUCTS = [];
 
+    // ── Productos del Admin ──────────────────────────────
+async function cargarDesdeSupabase() {
+  try {
+    const { data, error } = await supabase
+      .from('productos')
+      .select('*')
+      // Cambiamos 'fecha_creacion' por 'created_at' que es el estándar de Supabase
+      .order('created_at', { ascending: false }); 
 
+    if (error) {
+      console.error("Error de Supabase:", error);
+      throw error;
+    }
+
+    // El resto de tu mapeo está bien
+    PRODUCTS = (data || []).map(p => ({
+      id: p.id,
+      name: (p.nombre || '').toUpperCase(),
+      cat: (p.categoria || 'otros').toLowerCase().trim().replace(/\s+/g, '-'),
+      price: parseFloat(p.precio) || 0,
+      img: p.imagen,
+      desc: p.descripcion || '',
+      new: true
+    }));
+
+    renderProducts();
+    // ... resto del código
+  } catch (err) {
+    // ... manejo de errores
+  }
+}
+
+// Llamamos a la función al cargar la página
+document.addEventListener('DOMContentLoaded', cargarDesdeSupabase);
+// ────────────────────────────────────────────────────
     let cart = [];
     let currentCategory = 'todos';
     let currentPromo = 'todos';
@@ -1141,7 +1091,7 @@
       ${p.promo ? '<div class="promo-badge">Promoción</div>' : p.new ? '<div class="new-badge">Nuevo</div>' : ''}
       <div class="prod-img">
   ${p.img
-            ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">`
+            ? `<img src="${p._adminImg || p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">`
             : ICON_SVG}
 </div>
       <div class="prod-info">
@@ -1262,8 +1212,8 @@
       document.getElementById('modalName').textContent = currentProduct.name;
       document.getElementById('modalDesc').textContent = currentProduct.desc;
       document.getElementById('modalPrice').textContent = 'S/ ' + currentProduct.price + (currentProduct.oldPrice ? ' (Antes S/ ' + currentProduct.oldPrice + ')' : '');
-      document.getElementById('modalImg').innerHTML = currentProduct.img
-        ? `<img src="${currentProduct.img}" alt="${currentProduct.name}" style="width:100%;height:100%;object-fit:contain;padding:20px;">`
+      document.getElementById('modalImg').innerHTML = currentProduct._adminImg
+        ? `<img src="${currentProduct._adminImg}" alt="${currentProduct.name}" style="width:100%;height:100%;object-fit:contain;padding:20px;">`
         : ICON_SVG;
       document.getElementById('modalOverlay').classList.add('open');
     }
@@ -1288,6 +1238,87 @@
     updateCartUI();
   </script>
 
-</body>
+  <!-- FOOTER -->
+  <footer style="background:#0a0a0a;border-top:1px solid #1a1a1a;padding:2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#FFD600;">Lion Nutrition</div>
+    <div style="font-size:12px;color:#444;">© 2025 Lion Nutrition — Lima, Perú</div>
+    <div style="font-size:11px;color:#222;letter-spacing:1px;">Suplementos de alto rendimiento</div>
+  </footer>
 
+  <!-- MODAL LOGIN ADMIN -->
+  <div id="adminLoginOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#111;border:1px solid #2a2a2a;border-top:3px solid #FFD600;padding:2.5rem 2rem;width:100%;max-width:360px;font-family:'Barlow',sans-serif;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:#FFD600;margin-bottom:4px;">LION NUTRITION</div>
+      <div style="font-size:12px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;">Panel de administración</div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Usuario</label>
+        <input id="adminUserInput" type="text" placeholder="Tu usuario"
+          style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff;padding:11px 14px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;box-sizing:border-box;"
+          onkeydown="if(event.key==='Enter')verificarLoginAdmin()"
+          onfocus="this.style.borderColor='#FFD600'" onblur="this.style.borderColor='#2a2a2a'" />
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <label style="display:block;font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Contraseña</label>
+        <input id="adminPassInput" type="password" placeholder="Tu contraseña"
+          style="width:100%;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff;padding:11px 14px;font-size:14px;font-family:'Barlow',sans-serif;outline:none;box-sizing:border-box;"
+          onkeydown="if(event.key==='Enter')verificarLoginAdmin()"
+          onfocus="this.style.borderColor='#FFD600'" onblur="this.style.borderColor='#2a2a2a'" />
+      </div>
+
+      <div id="adminLoginError" style="display:none;font-size:12px;color:#e24b4a;margin-bottom:14px;letter-spacing:1px;">
+        ✕ Usuario o contraseña incorrectos
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <button onclick="verificarLoginAdmin()"
+          style="flex:1;background:#FFD600;color:#0a0a0a;border:none;padding:12px;font-family:'Barlow',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">
+          INGRESAR
+        </button>
+        <button onclick="cerrarLoginAdmin()"
+          style="background:none;border:1px solid #2a2a2a;color:#666;padding:12px 18px;font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ══ CREDENCIALES ADMIN — cambia estos valores ══ */
+    const ADMIN_USUARIO = 'lionadmin';   // ← cambia el usuario
+    const ADMIN_CLAVE   = 'lion2024';    // ← cambia la contraseña
+    /* ══════════════════════════════════════════════ */
+
+    function abrirLoginAdmin() {
+      document.getElementById('adminLoginOverlay').style.display = 'flex';
+      document.getElementById('adminUserInput').value = '';
+      document.getElementById('adminPassInput').value = '';
+      document.getElementById('adminLoginError').style.display = 'none';
+      setTimeout(() => document.getElementById('adminUserInput').focus(), 50);
+    }
+
+    function cerrarLoginAdmin() {
+      document.getElementById('adminLoginOverlay').style.display = 'none';
+    }
+
+function verificarLoginAdmin() {
+  const user = document.getElementById('adminUserInput').value.trim();
+  const pass = document.getElementById('adminPassInput').value;
+  if (user === ADMIN_USUARIO && pass === ADMIN_CLAVE) {
+    sessionStorage.setItem('lion_admin_auth', 'ok'); // ← guarda la sesión
+    window.location.href = 'admin.html';
+  } else {
+    document.getElementById('adminLoginError').style.display = 'block';
+    document.getElementById('adminPassInput').value = '';
+    document.getElementById('adminPassInput').focus();
+  }
+}
+
+    document.getElementById('adminLoginOverlay').addEventListener('click', function(e) {
+      if (e.target === this) cerrarLoginAdmin();
+    });
+  </script>
+
+</body>
 </html>
