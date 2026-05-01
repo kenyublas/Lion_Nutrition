@@ -866,6 +866,72 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0)
     }
+    
+/* --- ESTILOS GENERALES (PC) --- */
+.hero-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    width: 100%;
+}
+
+.hero-text-center {
+    text-align: center;
+}
+
+.promo-banner-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    flex-wrap: wrap; /* Permite que bajen si no caben */
+}
+
+.promo-grande {
+    height: 500px; /* Tamaño imponente en PC */
+    width: auto;
+    border: 2px solid #FFD600;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.promo-grande:hover {
+    transform: scale(1.03);
+}
+
+/* --- AJUSTES PARA CELULARES (Pantallas menores a 768px) --- */
+@media (max-width: 768px) {
+    .promo-banner-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Pone las imágenes de 2 en 2 */
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .promo-grande {
+        height: auto; /* Deja que el ancho mande */
+        width: 100%;  /* Ocupa todo el espacio del cuadro del grid */
+        max-height: 200px; /* Evita que se estiren demasiado */
+        object-fit: cover;
+    }
+
+    .shop-hero h1 {
+        font-size: 1.8rem; /* Título más pequeño en móvil */
+    }
+}
+
+/* --- AJUSTE PARA CELULARES MUY PEQUEÑOS (1 sola columna) --- */
+@media (max-width: 480px) {
+    .promo-banner-container {
+        grid-template-columns: 1fr; /* Una imagen debajo de otra */
+    }
+    
+    .promo-grande {
+        max-height: 250px;
+    }
+}
   </style>
 
   <!-- NAV CORREGIDO -->
@@ -896,21 +962,65 @@
     </div>
   </nav>
 
-  <div class="shop-hero">
-    <div>
-      <h1>NUESTRA <span>TIENDA</span></h1>
-      <p id="heroCount">Mostrando todos los productos</p>
+  <!-- === LÍNEA 898 (aprox) === -->
+<!-- === LÍNEA 900 (aprox) === -->
+<!-- === SECCIÓN SHOP-HERO (Línea 900 aprox) === -->
+<div class="shop-hero">
+    <div class="hero-content-wrapper">
+        
+        <!-- Título -->
+        <div class="hero-text-center">
+            <h1>NUESTRA <span>TIENDA</span></h1>
+        </div>
+
+        <!-- Contenedor de Promociones -->
+        <div class="promo-banner-container">
+            <a href="https://wa.me/51929504847?text=Hola!%20Quiero%20la%20promoción%201" target="_blank" class="promo-link">
+                <img src="promo1.jpg" alt="Promo 1" class="promo-grande">
+            </a>
+            <a href="https://wa.me/51929504847?text=Hola!%20Quiero%20la%20promoción%202" target="_blank" class="promo-link">
+                <img src="promo2.jpg" alt="Promo 2" class="promo-grande">
+            </a>
+            <a href="https://wa.me/51929504847?text=Hola!%20Quiero%20la%20promoción%203" target="_blank" class="promo-link">
+                <img src="promo3.jpg" alt="Promo 3" class="promo-grande">
+            </a>
+            <a href="https://wa.me/51929504847?text=Hola!%20Quiero%20la%20promoción%204" target="_blank" class="promo-link">
+                <img src="promo4.jpg" alt="Promo 4" class="promo-grande">
+            </a>
+        </div>
+
+        <!-- Buscador -->
+      
+            </button>
+        </div>
+
     </div>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="applyFilters()">
-      <button onclick="applyFilters()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.35-4.35" />
-        </svg>
-      </button>
+</div>
+
+        <!-- Caja de búsqueda centrada -->
+        <div class="search-box" style="margin: 0 auto;">
+            <!-- ... tu código de input y botón ... -->
+        </div>
     </div>
-  </div>
+</div>
+        <!-- Fila Inferior: Caja de búsqueda y Controles -->
+        <div style="display: flex; gap: 10px; width: 100%; justify-content: space-between; align-items: center;">
+            <!-- Controles de carrusel (los guiones amarillos) -->
+            <div style="display: flex; gap: 8px;">
+                <span style="display: inline-block; width: 30px; height: 3px; background-color: #FFD600; border-radius: 2px;"></span>
+                <span style="display: inline-block; width: 30px; height: 3px; background-color: #333; border-radius: 2px;"></span>
+            </div>
+
+            <!-- Caja de búsqueda actual -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar producto ..." oninput="applyFilters()">
+                <button onclick="applyFilters()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
   <div class="shop-layout">
     <aside class="sidebar">
